@@ -1,5 +1,3 @@
-Aqui está uma versão mais chamativa para o seu README.md:
-
 ---
 
 ## Olá, pessoal! Muito obrigado pela oportunidade de participar deste processo seletivo com vocês! 🚀
