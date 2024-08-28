@@ -11,7 +11,7 @@
 <body>
     <h1 style="color:aliceblue">Editar Produto no Estoque</h1>
 @if (session()->has('message'))
-    <p>{{ session()->get('message') }}</p>
+    <p style="color:green; font-size:20px ">{{ session()->get('message') }}</p>
 
 @endif
     <form action="{{ route('product.update', ['cod_produto' => $product->cod_produto]) }}" method="POST">
@@ -31,6 +31,8 @@
         <button type="submit">Atualizar</button>
     </div>
     </form>
-    <a style="color:aliceblue; margin-top:150px" href="{{ route('products.index') }}" class="btn btn-primary">Voltar</a>
+    <button type="button">
+        <a style="color:aliceblue; margin-top:150px" href="{{ route('products.index') }}" class="btn btn-primary">Voltar</a>
+    </button>
 </body>
 </html>

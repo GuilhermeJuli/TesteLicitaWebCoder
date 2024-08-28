@@ -14,11 +14,15 @@
         <strong>| Data de Alteração das Descrições da Marca/Fabricante: </strong> {{ $brand->updated_at }}
 
         <div>
-            <a href="{{ route('brand.edit', ['cod_marca' => $brand->cod_marca]) }}">Editar</a>
-            <a href="{{ route('brand.show', ['cod_marca' => $brand->cod_marca]) }}">Detalhes</a>
-
+            <button type="button" class="btn btn-primary">
+                <a href="{{ route('brand.edit', ['cod_marca' => $brand->cod_marca]) }}">Editar</a>
+            </button>
+            <button type="button" class="btn btn-secondary">
+                <a href="{{ route('brand.show', ['cod_marca' => $brand->cod_marca]) }}">Detalhes</a>
+            </button>
             <form action="{{ route('brand.destroy', ['cod_marca' => $brand->cod_marca]) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
                 @csrf
+                @method('DELETE')
                 <input type="hidden" name="_method" value="DELETE">
                 <button type="submit" class="btn btn-danger">Excluir</button>
             </form>

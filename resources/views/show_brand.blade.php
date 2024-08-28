@@ -11,9 +11,7 @@
 
     <p><strong>Código do Fornecedor:</strong> {{ $brand->cod_marca }}</p>
     <p><strong>Nome do Produto:</strong> {{ $brand->nome_marca }}</p>
-    <p><strong>Valor R$:</strong> {{ $brand->fabricante }}</p>
-
-    <a style="color: black;" href="{{ route('brand.index') }}"> <=Voltar</a>
+    <p><strong>Fabricante:</strong> {{ $brand->fabricante }}</p>
 </body>
 </html>
 @endsection

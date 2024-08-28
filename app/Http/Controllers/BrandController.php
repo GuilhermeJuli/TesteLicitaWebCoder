@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
@@ -58,9 +59,13 @@ class BrandController extends Controller
 
     public function destroy($cod_marca)
     {
-        $brand = Brand::where('cod_marca',$cod_marca)->firstOrFail();
-        $brand->delete();
-
-        return redirect()->route('brand.index');
+        $deleted = DB::table('brands')->where('cod_marca', $cod_marca)->delete();
+    
+        if ($deleted) {
+            return redirect()->back()->with('message', 'Fornecedor Deletado com Sucesso!!');
+        } else {
+            return redirect()->back()->with('message', 'Erro ao Deletar o Fornecedor!!');
+        }
     }
+    
 }

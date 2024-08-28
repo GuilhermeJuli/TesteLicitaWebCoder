@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
@@ -45,10 +46,11 @@ class CityController extends Controller
      * Display the specified resource.
      */
     public function show($cod_cidade)
-    {
-        $city = City::where('cod_cidade'.$cod_cidade)->firstOrFail();
-        return view('show_city',['city'=> $city]);
-    }
+{
+    $city = City::where('cod_cidade', $cod_cidade)->firstOrFail();
+    return view('show_city', ['city' => $city]);
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -75,11 +77,14 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($city)
+    public function destroy($cod_cidade)
     {
-        $city = City::findOrFail($city);
-        $city->delete();
-
-        return redirect()->route('city.index');
+        DB::table('products')->where('cidade_id', $cod_cidade)->delete();
+        
+        $deleted = DB::table('cities')->where('cod_cidade', $cod_cidade)->delete();
+        
+        return redirect()->route('city.index')->with('message', 'Cidade excluída com sucesso!');
     }
+    
+
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -64,27 +66,24 @@ class ProductController extends Controller
             return redirect()->back()->with('message', 'Erro ao Atualizar o Produto!!');
         }
     }
-
-    public function destroy(Request $request)
-{   
-        $cod_produto = Product::findOrFail($request->cod_produto);
-
-        DB::transaction(function () use ($cod_produto) {
-            $cod_produto->produtos()->update(['cod_produto' => 0]);
-            $cod_produto->delete();
-        });
-
-
-    if ($cod_produto) {
-        if ($cod_produto->estoque > 0) {
-            return redirect()->route('product.index')->with('message', 'Não é possível excluir um produto com estoque!');
+    public function destroy($cod_produto)
+    {
+        $product = DB::table('products')->where('cod_produto', $cod_produto)->first();
+    
+        if ($product && $product->estoque == 0) {
+            $deleted = DB::table('products')->where('cod_produto', $cod_produto)->delete();
+    
+            if ($deleted) {
+                return redirect()->route('product.index')->with('message', 'Produto excluído com sucesso!');
+            } else {
+                return redirect()->back()->with('message', 'Erro ao excluir o Produto!!');
+            }
+        } else {
+            return redirect()->back()->with('message', 'Produto não pode ser excluído ou estoque diferente de zero!');
         }
-
-        $cod_produto->delete();
-        return redirect()->route('product.index')->with('message', 'Produto excluído com sucesso!');
-    } else {
-        return redirect()->route('product.index')->with('message', 'Produto não encontrado!');
     }
-}
+    
+    
+    
 
 }
