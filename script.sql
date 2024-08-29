@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS products (
     cidade_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (marca_produto) REFERENCES brands(cod_marca),
+    FOREIGN KEY (marca_produto) REFERENCES brands(cod_marca) ON DELETE CASCADE,
     FOREIGN KEY (cidade_id) REFERENCES cities(cod_cidade)
 );
 

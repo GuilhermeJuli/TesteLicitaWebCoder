@@ -19,11 +19,10 @@
                         <a href="{{ route('product.show', ['cod_produto' => $product->cod_produto]) }}">Detalhes</a>
                     </button>
                     <form action="{{ route('product.destroy', $product->cod_produto) }}" method="POST" style="display: inline" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Excluir</button>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Excluir</but>
                     </form>
-
 
                 </div>
             </li>

@@ -73,10 +73,6 @@ class CityController extends Controller
             return redirect()->back()->with('message',"Erro ao Atualizar o Fornecedor!!");
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($cod_cidade)
     {
         DB::table('products')->where('cidade_id', $cod_cidade)->delete();
